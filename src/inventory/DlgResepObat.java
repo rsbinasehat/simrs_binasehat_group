@@ -66,7 +66,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="", uploadlink="https://webhook.site/557869a3-0a94-4b6e-a2d3-f45f97e7e33b";
+    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="", uploadlink="http://localhost:3030/api/print";
     private double total=0,jumlahtotal=0;
     private Properties prop = new Properties();
     private DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
