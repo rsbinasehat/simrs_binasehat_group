@@ -10,6 +10,8 @@
  */
 
 package inventory;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -42,6 +44,12 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariDokter;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -53,12 +61,12 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps,ps2,psracikan;
-    private ResultSet rs,rs2,rsracikan;
+    private PreparedStatement ps,ps2,psracikan,psupload;
+    private ResultSet rs,rs2,rsracikan,rsupload;
     public DlgCariDokter dokter=new DlgCariDokter(null,false);
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="";
+    private String now=dateFormat.format(date),lembarobat="",status="",rincianobat="",finger="", uploadlink="https://webhook.site/557869a3-0a94-4b6e-a2d3-f45f97e7e33b";
     private double total=0,jumlahtotal=0;
     private Properties prop = new Properties();
     private DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
@@ -307,6 +315,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         ppLembarObat2 = new javax.swing.JMenuItem();
         ppUbahAturanPakai = new javax.swing.JMenuItem();
         ppUbahAturanPakai1 = new javax.swing.JMenuItem();
+        ppUploadKePrinter = new javax.swing.JMenuItem();
         WindowInput3 = new javax.swing.JDialog();
         internalFrame4 = new widget.InternalFrame();
         scrollPane1 = new widget.ScrollPane();
@@ -525,6 +534,23 @@ public final class DlgResepObat extends javax.swing.JDialog {
             }
         });
         Popup2.add(ppUbahAturanPakai1);
+        
+        ppUploadKePrinter.setBackground(new java.awt.Color(255, 255, 254));
+        ppUploadKePrinter.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppUploadKePrinter.setForeground(new java.awt.Color(50, 50, 50));
+        ppUploadKePrinter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppUploadKePrinter.setText("Test Cetak Printer");
+        ppUploadKePrinter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppUploadKePrinter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppUploadKePrinter.setName("ppUploadKePrinter"); // NOI18N
+        ppUploadKePrinter.setPreferredSize(new java.awt.Dimension(225, 25));
+        ppUploadKePrinter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppUploadKePrinterActionPerformed(evt);
+            }
+        });
+
+        Popup2.add(ppUploadKePrinter);
 
         WindowInput3.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowInput3.setName("WindowInput3"); // NOI18N
@@ -863,7 +889,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:52" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-11-2025 08:43:03" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -877,7 +903,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022 20:49:53" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-11-2025 08:43:03" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1007,7 +1033,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 95, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "15-04-2022" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-11-2025" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -1109,7 +1135,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         PanelAccor.setPreferredSize(new java.awt.Dimension(445, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
 
-        ChkAccor.setBackground(new java.awt.Color(255,250,250));
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
         ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
         ChkAccor.setSelected(true);
         ChkAccor.setFocusable(false);
@@ -2221,6 +2247,159 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         }
     }//GEN-LAST:event_ppLembarObat2ActionPerformed
 
+    private void ppUploadKePrinterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUploadKePrinterActionPerformed
+        try {
+            try {
+                psupload = koneksi.prepareStatement(
+                    "SELECT " +
+                    "    pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, pasien.tgl_lahir, pasien.alamat, " +
+                    "    poliklinik.nm_poli, " +
+                    "    databarang.nama_brng, kodesatuan.satuan, " +
+                    "    resep_dokter_racikan.aturan_pakai, " +
+                    "    resep_dokter_racikan.keterangan, " +
+                    "    resep_dokter_racikan.jml_dr, " +
+                    "    resep_obat.jam_peresepan, " +
+                    "    aturan_pakai.aturan, " +
+                    "    resep_dokter.jml, databarang.expire " +
+                    "FROM reg_periksa " +
+
+                    "INNER JOIN pasien ON pasien.no_rkm_medis = reg_periksa.no_rkm_medis " +
+                    "INNER JOIN poliklinik ON poliklinik.kd_poli = reg_periksa.kd_poli " +
+
+                    "INNER JOIN detail_pemberian_obat " +
+                    "    ON detail_pemberian_obat.no_rawat = reg_periksa.no_rawat " +
+                    "    AND detail_pemberian_obat.kode_brng = detail_pemberian_obat.kode_brng " +
+
+                    "INNER JOIN resep_obat " +
+                    "    ON resep_obat.no_rawat = reg_periksa.no_rawat " +
+                    "    AND resep_obat.tgl_perawatan = detail_pemberian_obat.tgl_perawatan " +
+
+                    "INNER JOIN resep_dokter " +
+                    "    ON resep_dokter.no_resep = resep_obat.no_resep " +
+                    "    AND resep_dokter.kode_brng = detail_pemberian_obat.kode_brng " +
+
+                    "INNER JOIN databarang ON databarang.kode_brng = resep_dokter.kode_brng " +
+                    "INNER JOIN kodesatuan ON kodesatuan.kode_sat = databarang.kode_sat " +
+
+                    "LEFT JOIN aturan_pakai " +
+                    "    ON aturan_pakai.no_rawat = reg_periksa.no_rawat " +
+                    "    AND aturan_pakai.kode_brng = resep_dokter.kode_brng " +
+
+                    "LEFT JOIN resep_dokter_racikan " +
+                    "    ON resep_dokter_racikan.no_resep = resep_obat.no_resep " +
+
+                    "WHERE reg_periksa.no_rawat = ? " +
+                    "  AND detail_pemberian_obat.tgl_perawatan = ? " +
+                    "  AND detail_pemberian_obat.jam = ?"
+                    );
+                psupload.setString(1, TNoRw.getText());
+                psupload.setString(2, tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(0,10));  
+                psupload.setString(3, tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(11,13)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(14,16)+":"+tbResep.getValueAt(tbResep.getSelectedRow(),1).toString().substring(17,19));   
+
+                rsupload = psupload.executeQuery();
+                
+                try {
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); 
+//                    headers.add("X-Timestamp", org.joda.time.DateTime.now().toString());
+
+                    String URL = uploadlink + "/api/print";
+
+                    if (!rsupload.next()) {
+                        JOptionPane.showMessageDialog(null, "Data resep tidak ditemukan!");
+                        return;
+                    }
+
+                    String noRm = rsupload.getString("no_rkm_medis");
+                    String nama = rsupload.getString("nm_pasien");
+                    String nik = rsupload.getString("no_ktp");
+                    String kelaminDb = rsupload.getString("jk");
+                    String kelamin = "";
+                    if (kelaminDb.equals("L")) {
+                        kelamin = "Laki-laki";
+                    } else if (kelaminDb.equals("P")) {
+                        kelamin = "Perempuan";
+                    }
+                    String tglLahir = rsupload.getString("tgl_lahir");
+                    String alamat = rsupload.getString("alamat");
+                    String poli = rsupload.getString("nm_poli");
+
+                    String requestJson = "{"
+                        + "\"no_rm\": \"" + noRm + "\","
+                        + "\"nama\": \"" + nama + "\","
+                        + "\"nik\": \"" + nik + "\","
+                        + "\"kelamin\": \"" + kelamin + "\","
+                        + "\"tgl_lahir\": \"" + tglLahir + "\","
+                        + "\"alamat\": \"" + alamat + "\","
+                        + "\"poli\": \"" + poli + "\","
+                        + "\"resep\": [";
+
+                    boolean first = true;
+                    do {
+                        if (!first) {
+                            requestJson += ",";
+                        }
+                        first = false;
+
+                        requestJson += "{"
+                            + "\"obat\": \"" + rsupload.getString("nama_brng") + "\","
+                            + "\"tipe\": \"etiket_putih" + "\","
+                            + "\"aturan\": \"" + rsupload.getString("aturan_pakai") + "\","
+                            + "\"waktu\": \"" + rsupload.getString("jam_peresepan") + "\","
+                            + "\"catatan\": \"" + rsupload.getString("keterangan") + "\","
+                            + "\"satuan\": \"" + rsupload.getString("satuan") + "\","
+                            + "\"qty\": \"" + rsupload.getString("jml_dr") + "\","
+                            + "\"expired\": \"" + rsupload.getString("expire") + "\""
+                            + "}";
+                    } while(rsupload.next()); 
+
+                    requestJson += "]}";
+
+                    HttpEntity<String> requestEntity = new HttpEntity<>(requestJson, headers);
+                    RestTemplate restTemplate = new RestTemplate();
+
+                    try {
+                        ResponseEntity<String> response = restTemplate.exchange(
+                            URL, 
+                            HttpMethod.POST, 
+                            requestEntity, 
+                            String.class
+                        );
+                        JOptionPane.showMessageDialog(null, "data berhasil dikirim ke API..!!");
+//                        JsonNode root = new ObjectMapper().readTree(response.getBody());
+//                        JsonNode metadata = root.path("metaData");
+                              
+//                        if (metadata.path("code").asText().equals("200")) {
+//                            JOptionPane.showMessageDialog(null, "Proses mapping selesai, data berhasil dikirim ke API..!!");
+//                        } else {
+//                            JOptionPane.showMessageDialog(null, metadata.path("message").asText());
+//                        }
+
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "API Error: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                    
+            } catch (Exception e) {
+                System.out.println("Notifikasi Query Obat : " + e);
+            } finally {
+                if (rsupload != null) rsupload.close();
+                if (psupload != null) psupload.close();
+            } 
+        }
+         catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+
+    }//GEN-LAST:event_ppUploadKePrinterActionPerformed
+
+
+    
     /**
     * @param args the command line arguments
     */
@@ -2315,13 +2494,15 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JMenuItem ppResepObat2;
     private javax.swing.JMenuItem ppUbahAturanPakai;
     private javax.swing.JMenuItem ppUbahAturanPakai1;
+    private javax.swing.JMenuItem ppUploadKePrinter;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
     private widget.Table tbResep;
     private widget.Table tbTambahan;
     private widget.Table tbTambahan1;
     // End of variables declaration//GEN-END:variables
-
+    
+    
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{  
@@ -2615,6 +2796,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             System.out.println("Notif : "+e);
         } 
     }
+
 
     private void tampilresep2() {
         Valid.tabelKosong(tabmodeUbahRacikan2);
