@@ -85,7 +85,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         Object[] row={"No.Resep","Tgl.Resep","Pasien","Dokter Peresep"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
-        };
+        };  
         tbResep.setModel(tabMode);
 
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
