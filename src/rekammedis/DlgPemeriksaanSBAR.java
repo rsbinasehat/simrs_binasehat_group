@@ -672,8 +672,8 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbSBAR.getSelectedRow()!= -1){
-            if(Sequel.queryu2tf("delete from pemeriksaan_sbar where tgl_perawatan=? and no_rawat=?",2,new String[]{
-                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString(),tbSBAR.getValueAt(tbSBAR.getSelectedRow(),2).toString()
+            if(Sequel.queryu2tf("delete from pemeriksaan_sbar where tgl_perawatan=? and no_rawat=? and jam_rawat=?",3,new String[]{
+                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString(),tbSBAR.getValueAt(tbSBAR.getSelectedRow(),2).toString(),tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString()
             })==true){
                 tampil();
                 emptTeks();
@@ -706,17 +706,21 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         }else if(taRecommendation.getText().trim().equals("")){
             Valid.textKosong(taRecommendation,"Recommendation");
         }else{
-            Sequel.mengedittf("pemeriksaan_sbar","?,?,?,?,?,?,?,?,?","Data SBAR",9,new String[]{
-                TNoRw.getText(), 
+            Sequel.mengedittf("pemeriksaan_sbar","tgl_perawatan=? and jam_rawat=? and no_rawat=?","tgl_perawatan=?,jam_rawat=?,no_rawat=?,situation=?,background=?,assessment=?,recommendation=?,status=?,nip=?",12,new String[]{
                 Valid.SetTgl(TglPerawatan.getSelectedItem()+""),
                 cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                TNoRw.getText(),
                 taSituation.getText(),
                 taBackground.getText(),
                 taAssessment.getText(),
                 taRecommendation.getText(),
                 this.status,
-                KodePegawai.getText()
+                KodePegawai.getText(),
+                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString(),  
+                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString(),  
+                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),2).toString()   
             });
+
             if(tabMode.getRowCount()!=0){tampil();}
             emptTeks();
         }
@@ -1021,16 +1025,16 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
             TNoRw.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),2).toString());
             TNoRM.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),3).toString());
             TPasien.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),4).toString());
-            taSituation.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),5).toString());
-            taBackground.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),6).toString());
-            taAssessment.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),7).toString());
-            taRecommendation.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),8).toString());
-            KodePegawai.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),9).toString());
+            taSituation.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),6).toString());
+            taBackground.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),7).toString());
+            taAssessment.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),8).toString());
+            taRecommendation.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),9).toString());
+            KodePegawai.setText(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),10).toString());
             
             Valid.SetTgl(TglPerawatan,tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString());
-            cmbJam.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(11,13));
-            cmbMnt.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(14,16));
-            cmbDtk.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(17,19));
+            cmbJam.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(0,2)); 
+            cmbMnt.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(3,5)); 
+            cmbDtk.setSelectedItem(tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString().substring(6,8)); 
         }
     }
     
