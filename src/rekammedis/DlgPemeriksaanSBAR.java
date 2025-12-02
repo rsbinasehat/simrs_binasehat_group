@@ -672,8 +672,8 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbSBAR.getSelectedRow()!= -1){
-            if(Sequel.queryu2tf("delete from data_HAIs where tanggal=? and no_rawat=?",2,new String[]{
-                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString(),tbSBAR.getValueAt(tbSBAR.getSelectedRow(),1).toString()
+            if(Sequel.queryu2tf("delete from pemeriksaan_sbar where tgl_perawatan=? and no_rawat=?",2,new String[]{
+                tbSBAR.getValueAt(tbSBAR.getSelectedRow(),0).toString(),tbSBAR.getValueAt(tbSBAR.getSelectedRow(),2).toString()
             })==true){
                 tampil();
                 emptTeks();
