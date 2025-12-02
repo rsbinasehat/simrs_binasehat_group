@@ -1071,13 +1071,14 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
     }
 
     public void setNoRm(String norwt,Date tgl1,Date tgl2,String status) {
-        String now = dateFormat.format(new Date());
+        Date date = new Date();
+        String now = dateFormat.format(date);
         
         TNoRw.setText(norwt);
         Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
         TCari.setText(norwt); 
-        TglPerawatan.setDate(tgl1);
+        TglPerawatan.setDate(date);
         cmbJam.setSelectedItem( now.substring(11, 13));
         cmbMnt.setSelectedItem(now.substring(14, 16));
         cmbDtk.setSelectedItem( now.substring(17, 19));
