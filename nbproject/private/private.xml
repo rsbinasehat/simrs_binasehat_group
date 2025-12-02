@@ -19,6 +19,22 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/kepegawaian/DlgCariDokter.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/kepegawaian/DlgCariPetugas.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/fungsi/akses.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/rekammedis/DlgPemeriksaanSBAR.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/inventaris/PengajuanInventaris.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/fungsi/sekuel.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/bridging/SisruteRujukanMasukan.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/inventory/DlgResepObat.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/simrskhanza/DlgReg.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/simrskhanza/DlgKamarInap.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/inventaris/KeslingPemakaiaanAirTanah.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/simrskhanza/DlgKasirRalan.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/rekammedis/RMDataResumePasienRanap.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/dapur/DapurRingkasanPenerimaanBarang.java</file>
+            <file>file:/D:/Program/BinaSehat/simrs_binasehat/src/laporan/DlgDataHAIs.java</file>
+        </group>
     </open-files>
 </project-private>

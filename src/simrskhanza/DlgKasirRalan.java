@@ -14,6 +14,7 @@ package simrskhanza;
 import bridging.BPJSCekDataIndukKecelakaan;
 import bridging.BPJSCekSuplesiJasaRaharja;
 import rekammedis.RMRiwayatPerawatan;
+import rekammedis.DlgPemeriksaanSBAR;
 import bridging.BPJSDataSEP;
 import bridging.BPJSProgramPRB;
 import bridging.BPJSSPRI;
@@ -13971,7 +13972,38 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
             }
         }
     }//GEN-LAST:event_MnSkorBromagePascaAnestesiActionPerformed
-
+    
+    private void MnPemeriksaanSBARActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else {
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                try {
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgPemeriksaanSBAR form = new DlgPemeriksaanSBAR(null, false);
+                    form.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                    form.setLocationRelativeTo(internalFrame1);
+                    form.isCek();
+                    form.setVisible(true);
+                    form.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ralan",
+                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(0,2),
+                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(3,5),
+                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(6,8));
+                    form.emptTeks();
+                    form.tampil();
+                    this.setCursor(Cursor.getDefaultCursor()); 
+                } catch (Exception e) {
+                    System.out.println("SBAR :" + e);
+                }
+            }
+        }
+    } 
+    
+    
     private void MnPenilaianPreInduksiActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -15632,7 +15664,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                   MnSkriningKesehatanGigiMulutRemaja,MnSkriningTBC,MnCatatanAnastesiSedasi,MnSkriningPUMA,MnSkriningAdiksiNikotin,MnSkriningThalassemia,MnSkriningInstrumenSDQ,MnSkriningInstrumenSRQ,MnChecklistPemberianFibrinolitik,
                                   MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus,MnLaporanTindakan,MnPelaksanaanInformasiEdukasi,
                                   MnLayananKedokteranFisikRehabilitasi,MnSkriningKesehatanGigiMulutBalita,MnSkriningAnemia,MnSkriningHipertensi,MnSkriningKesehatanPenglihatan,MnCatatanObservasiHemodialisa,MnSkriningKesehatanGigiMulutDewasa,
-                                  MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,MnSkriningFrailtySyndrome,MnCatatanObservasiBayi;
+                                  MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,MnSkriningFrailtySyndrome,MnCatatanObservasiBayi,
+                                  MnPemeriksaanSBAR;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut;
     
     private void tampilkasir() {     
@@ -16662,6 +16695,19 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     }
     
     private void initKasirRalan() {
+        
+        MnPemeriksaanSBAR = new javax.swing.JMenuItem();
+        MnPemeriksaanSBAR.setBackground(new java.awt.Color(255, 255, 254));
+        MnPemeriksaanSBAR.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnPemeriksaanSBAR.setForeground(new java.awt.Color(50, 50, 50));
+        MnPemeriksaanSBAR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnPemeriksaanSBAR.setText("Pemeriksaan SBAR");
+        MnPemeriksaanSBAR.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPemeriksaanSBAR.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPemeriksaanSBAR.setName("MnPemeriksaanSBAR"); // NOI18N
+        MnPemeriksaanSBAR.setPreferredSize(new java.awt.Dimension(220, 26));
+        MnPemeriksaanSBAR.addActionListener(this::MnPemeriksaanSBARActionPerformed);
+        
         MnPenilaianPreInduksi = new javax.swing.JMenuItem();
         MnPenilaianPreInduksi.setBackground(new java.awt.Color(255, 255, 254));
         MnPenilaianPreInduksi.setFont(new java.awt.Font("Tahoma", 0, 11)); 
@@ -17386,6 +17432,8 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnRMSkriningKesehatanGigiMulut.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnRMSkriningKesehatanGigiMulut.setName("MnRMSkriningKesehatanGigiMulut"); 
         MnRMSkriningKesehatanGigiMulut.setPreferredSize(new java.awt.Dimension(200, 26));
+        
+        MnTindakanRalan.add(MnPemeriksaanSBAR);
         
         MnRMOperasi.add(MnPenilaianPreInduksi);
         MnRMOperasi.add(MnChecklistPreOperasi);
