@@ -18272,7 +18272,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     form.setLocationRelativeTo(internalFrame1);
                     form.isCek();
                     form.setVisible(true);
-                    form.setNoRm(norawat.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ranap", now.substring(11, 13), now.substring(14, 16), now.substring(17, 19));
+                    form.setNoRm(norawat.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ranap");
                     form.emptTeks();
                     form.tampil();
                     this.setCursor(Cursor.getDefaultCursor()); 

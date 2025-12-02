@@ -42,6 +42,7 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
     private int tableIndex=0;
     private String status=""; 
     private DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     /**
      * Creates new form DlgPemeriksaanSBAR
      * @param parent
@@ -1069,15 +1070,17 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
 
-    public void setNoRm(String norwt,Date tgl1,Date tgl2,String status, String jam,String menit,String detik) {
+    public void setNoRm(String norwt,Date tgl1,Date tgl2,String status) {
+        String now = dateFormat.format(new Date());
+        
         TNoRw.setText(norwt);
         Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat=? ",TNoRM,TNoRw.getText());
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,TNoRM.getText());
         TCari.setText(norwt); 
         TglPerawatan.setDate(tgl1);
-        cmbJam.setSelectedItem(jam);
-        cmbMnt.setSelectedItem(menit);
-        cmbDtk.setSelectedItem(detik);
+        cmbJam.setSelectedItem( now.substring(11, 13));
+        cmbMnt.setSelectedItem(now.substring(14, 16));
+        cmbDtk.setSelectedItem( now.substring(17, 19));
         Valid.SetTgl2(DTPCari1,format.format(tgl1)+" 00:00:00");
         Valid.SetTgl2(DTPCari2,format.format(tgl2)+" 23:59:59");
         KodePegawai.setText(akses.getkode());

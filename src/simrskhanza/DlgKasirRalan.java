@@ -13989,10 +13989,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                     form.setLocationRelativeTo(internalFrame1);
                     form.isCek();
                     form.setVisible(true);
-                    form.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ralan",
-                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(0,2),
-                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(3,5),
-                        tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),13).toString().substring(6,8));
+                    form.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ralan");
                     form.emptTeks();
                     form.tampil();
                     this.setCursor(Cursor.getDefaultCursor()); 
