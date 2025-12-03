@@ -156,6 +156,8 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
         PanelInput = new javax.swing.JPanel();
+        ChkInput = new widget.CekBox();
+        scrollInput = new widget.ScrollPane();
         FormInput = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
         TNoRw = new widget.TextBox();
@@ -181,17 +183,15 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         jLabel23 = new widget.Label();
         KodePegawai = new widget.TextBox();
         NamaPegawai = new widget.TextBox();
-        ChkInput = new widget.CekBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(554, 400));
         setUndecorated(true);
-        setResizable(false);
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Data Hasil Pemeriksaan SBAR ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setMinimumSize(new java.awt.Dimension(554, 400));
-        internalFrame1.setPreferredSize(new java.awt.Dimension(462, 539));
+        internalFrame1.setPreferredSize(new java.awt.Dimension(462, 600));
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setOpaque(true);
@@ -348,7 +348,7 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-12-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setOpaque(false);
         DTPCari1.setPreferredSize(new java.awt.Dimension(95, 23));
@@ -360,7 +360,7 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-12-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setOpaque(false);
         DTPCari2.setPreferredSize(new java.awt.Dimension(95, 23));
@@ -409,11 +409,33 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
 
         PanelInput.setMinimumSize(new java.awt.Dimension(85, 50));
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(100, 365));
+        PanelInput.setPreferredSize(new java.awt.Dimension(735, 380));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
+        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setMnemonic('I');
+        ChkInput.setText(".: Input Data");
+        ChkInput.setToolTipText("Alt+I");
+        ChkInput.setBorderPainted(true);
+        ChkInput.setBorderPaintedFlat(true);
+        ChkInput.setFocusable(false);
+        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
+        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        ChkInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkInputActionPerformed(evt);
+            }
+        });
+        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
+
+        scrollInput.setPreferredSize(new java.awt.Dimension(735, 361));
+
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
-        FormInput.setPreferredSize(null);
+        FormInput.setPreferredSize(new java.awt.Dimension(735, 361));
         FormInput.setLayout(null);
 
         jLabel4.setText("No.Rawat :");
@@ -421,43 +443,23 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 71, 23);
 
         TNoRw.setHighlighter(null);
-        TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRwKeyPressed(evt);
-            }
-        });
         FormInput.add(TNoRw);
         TNoRw.setBounds(80, 10, 130, 23);
 
         TPasien.setEditable(false);
         TPasien.setHighlighter(null);
-        TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TPasienKeyPressed(evt);
-            }
-        });
         FormInput.add(TPasien);
         TPasien.setBounds(320, 10, 309, 23);
 
         TglPerawatan.setForeground(new java.awt.Color(50, 70, 50));
-        TglPerawatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-12-2025" }));
+        TglPerawatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-12-2025" }));
         TglPerawatan.setDisplayFormat("dd-MM-yyyy");
         TglPerawatan.setOpaque(false);
-        TglPerawatan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglPerawatanKeyPressed(evt);
-            }
-        });
         FormInput.add(TglPerawatan);
         TglPerawatan.setBounds(80, 40, 100, 23);
 
         TNoRM.setEditable(false);
         TNoRM.setHighlighter(null);
-        TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TNoRMKeyPressed(evt);
-            }
-        });
         FormInput.add(TNoRM);
         TNoRM.setBounds(215, 10, 100, 23);
 
@@ -467,29 +469,14 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         jLabel16.setBounds(0, 70, 90, 23);
 
         cmbJam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        cmbJam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbJamKeyPressed(evt);
-            }
-        });
         FormInput.add(cmbJam);
         cmbJam.setBounds(190, 40, 62, 23);
 
         cmbMnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbMnt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbMntKeyPressed(evt);
-            }
-        });
         FormInput.add(cmbMnt);
         cmbMnt.setBounds(260, 40, 62, 23);
 
         cmbDtk.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbDtk.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cmbDtkKeyPressed(evt);
-            }
-        });
         FormInput.add(cmbDtk);
         cmbDtk.setBounds(330, 40, 62, 23);
 
@@ -548,50 +535,17 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
 
         KodePegawai.setEditable(false);
         KodePegawai.setHighlighter(null);
-        KodePegawai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KodePegawaiActionPerformed(evt);
-            }
-        });
-        KodePegawai.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                KodePegawaiKeyPressed(evt);
-            }
-        });
         FormInput.add(KodePegawai);
         KodePegawai.setBounds(80, 310, 100, 23);
 
         NamaPegawai.setEditable(false);
         NamaPegawai.setHighlighter(null);
-        NamaPegawai.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                NamaPegawaiKeyPressed(evt);
-            }
-        });
         FormInput.add(NamaPegawai);
         NamaPegawai.setBounds(185, 310, 250, 23);
 
-        PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
+        scrollInput.setViewportView(FormInput);
 
-        ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setMnemonic('I');
-        ChkInput.setText(".: Input Data");
-        ChkInput.setToolTipText("Alt+I");
-        ChkInput.setBorderPainted(true);
-        ChkInput.setBorderPaintedFlat(true);
-        ChkInput.setFocusable(false);
-        ChkInput.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ChkInput.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ChkInput.setPreferredSize(new java.awt.Dimension(192, 20));
-        ChkInput.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        ChkInput.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChkInputActionPerformed(evt);
-            }
-        });
-        PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
+        PanelInput.add(scrollInput, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
@@ -707,9 +661,7 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         }else if(taRecommendation.getText().trim().equals("")){
             Valid.textKosong(taRecommendation,"Recommendation");
         }else{
-            Sequel.mengedittf("pemeriksaan_sbar","tgl_perawatan=? and jam_rawat=? and no_rawat=?","tgl_perawatan=?,jam_rawat=?,no_rawat=?,situation=?,background=?,assessment=?,recommendation=?,status=?,nip=?",12,new String[]{
-                Valid.SetTgl(TglPerawatan.getSelectedItem()+""),
-                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+            Sequel.mengedittf("pemeriksaan_sbar","tgl_perawatan=? and jam_rawat=? and no_rawat=?","no_rawat=?,situation=?,background=?,assessment=?,recommendation=?,status=?,nip=?",10,new String[]{
                 TNoRw.getText(),
                 taSituation.getText(),
                 taBackground.getText(),
@@ -814,54 +766,9 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-    private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            isRawat();
-            isPsien();
-        }else{
-            //Valid.pindah(evt,TTmpRujuk,TDiagnosa);
-        }
-    }//GEN-LAST:event_TNoRwKeyPressed
-
-    private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
-        //Valid.pindah(evt,TDokter,BtnSimpan);
-    }//GEN-LAST:event_TPasienKeyPressed
-
-    private void TglPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglPerawatanKeyPressed
-        Valid.pindah(evt,TNoRw,cmbJam);
-    }//GEN-LAST:event_TglPerawatanKeyPressed
-
-    private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-        // Valid.pindah(evt, TNm, BtnSimpan);
-    }//GEN-LAST:event_TNoRMKeyPressed
-
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
-
-    private void cmbJamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJamKeyPressed
-        Valid.pindah(evt,TglPerawatan,cmbMnt);
-    }//GEN-LAST:event_cmbJamKeyPressed
-
-    private void cmbMntKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMntKeyPressed
-        Valid.pindah(evt,cmbJam,cmbDtk);
-    }//GEN-LAST:event_cmbMntKeyPressed
-
-    private void cmbDtkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtkKeyPressed
-        Valid.pindah(evt,cmbMnt,taSituation);
-    }//GEN-LAST:event_cmbDtkKeyPressed
-
-    private void KodePegawaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePegawaiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KodePegawaiKeyPressed
-
-    private void NamaPegawaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaPegawaiKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NamaPegawaiKeyPressed
-
-    private void KodePegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KodePegawaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KodePegawaiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -950,6 +857,7 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane6;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
+    private widget.ScrollPane scrollInput;
     private javax.swing.JTextArea taAssessment;
     private javax.swing.JTextArea taBackground;
     private javax.swing.JTextArea taRecommendation;
@@ -1061,13 +969,6 @@ public class DlgPemeriksaanSBAR extends javax.swing.JDialog {
         BtnSimpan.setEnabled(true);
         BtnHapus.setEnabled(true);
         BtnPrint.setEnabled(true);
-    }
-        private void isRawat() {
-         Sequel.cariIsi("select reg_periksa.no_rkm_medis from reg_periksa where reg_periksa.no_rawat='"+TNoRw.getText()+"' ",TNoRM);
-    }
-
-    private void isPsien() {
-        Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
 
     public void setNoRm(String norwt,Date tgl1,Date tgl2,String status) {
